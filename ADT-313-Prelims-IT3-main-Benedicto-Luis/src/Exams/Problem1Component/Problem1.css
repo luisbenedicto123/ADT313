@@ -1,0 +1,47 @@
+/* problem1.css */
+
+/* Container for the entire component */
+.problem1-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+  }
+  
+  /* Title Styling */
+  .problem1-container h1 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Paragraph styling */
+  .problem1-container p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  /* Strong text (for labels) */
+  .problem1-container p strong {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* A border for each student info block */
+  .problem1-container p {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  /* Avatar image styling */
+  .avatar {
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    margin-top: 10px;
+  }
+  
