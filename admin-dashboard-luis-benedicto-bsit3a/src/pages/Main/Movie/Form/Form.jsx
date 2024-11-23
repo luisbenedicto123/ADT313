@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import './Form.css';
 const Form = () => {
   const [query, setQuery] = useState('');
   const [searchedMovieList, setSearchedMovieList] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(undefined);
   const [movie, setMovie] = useState(undefined);
+  const navigate = useNavigate();
   let { movieId } = useParams();
 
   const handleSearch = useCallback(() => {
@@ -66,20 +67,22 @@ const Form = () => {
   //create a form change/validation
   //create a new handler for update
   useEffect(() => {
-    axios.get(`/movies/${movieId}`).then((response) => {
-      setMovie(response.data);
-      const tempData = {
-        id: response.data.tmdbId,
-        original_title: response.data.title,
-        overview: response.data.overview,
-        popularity: response.data.popularity,
-        poster_path: response.data.posterPath,
-        release_date: response.data.releaseDate,
-        vote_average: response.data.voteAverage,
-      };
-      setSelectedMovie(tempData);
-      console.log(response.data);
-    });
+    if (movieId) {
+      axios.get(`/movies/${movieId}`).then((response) => {
+        setMovie(response.data);
+        const tempData = {
+          id: response.data.tmdbId,
+          original_title: response.data.title,
+          overview: response.data.overview,
+          popularity: response.data.popularity,
+          poster_path: response.data.posterPath,
+          release_date: response.data.releaseDate,
+          vote_average: response.data.voteAverage,
+        };
+        setSelectedMovie(tempData);
+        console.log(response.data);
+      });
+    }
   }, []);
 
   return (
@@ -163,6 +166,38 @@ const Form = () => {
           </button>
         </form>
       </div>
+      {movieId !== undefined && selectedMovie && (
+        <div>
+          <hr />
+          <nav>
+            <ul className='tabs'>
+              <li
+                onClick={() => {
+                  navigate(`/main/movies/form/${movieId}/cast-and-crews`);
+                }}
+              >
+                Cast & Crews
+              </li>
+              <li
+                onClick={() => {
+                  navigate(`/main/movies/form/${movieId}/videos`);
+                }}
+              >
+                Videos
+              </li>
+              <li
+                onClick={() => {
+                  navigate(`/main/movies/form/${movieId}/photos`);
+                }}
+              >
+                Photos
+              </li>
+            </ul>
+          </nav>
+
+          <Outlet />
+        </div>
+      )}
     </>
   );
 };

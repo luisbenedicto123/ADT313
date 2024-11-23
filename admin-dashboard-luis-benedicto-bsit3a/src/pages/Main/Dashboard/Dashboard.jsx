@@ -1,72 +1,107 @@
-function Dashboard() {
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import './Dashboard.css';
+
+const Dashboard = () => {
+  const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
+
+  // Fetch all movies from backend
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    axios({
+      method: 'get',
+      url: '/movies',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => {
+        setMovies(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log('Error fetching movies:', error);
+      });
+  }, []);
+
+  // Handle delete movie
+  const handleDelete = (movieId) => {
+    const accessToken = localStorage.getItem('accessToken');
+    axios({
+      method: 'delete',
+      url: `/movies/${movieId}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => {
+        setMovies(movies.filter((movie) => movie.id !== movieId));
+        alert('Movie deleted successfully.');
+      })
+      .catch((error) => {
+        console.log('Error deleting movie:', error);
+      });
+  };
+
+  // Handle edit movie
+  const handleEdit = (movieId) => {
+    navigate(`/movies/edit/${movieId}`);
+  };
+
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Child component</p>
+    <div className='dashboard'>
+      <h1>Movie Dashboard</h1>
+      <Link to='/movies/new'>
+        <button className='add-button'>Add New Movie</button>
+      </Link>
+
+      <table className='movie-table'>
+        <thead>
+          <tr>
+            <th>Poster</th>
+            <th>Title</th>
+            <th>Overview</th>
+            <th>Popularity</th>
+            <th>Release Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {movies.map((movie) => (
+            <tr key={movie.id}>
+              <td>
+                <img
+                  src={movie.posterPath}
+                  alt={movie.title}
+                  className='poster-thumbnail'
+                />
+              </td>
+              <td>{movie.title}</td>
+              <td>{movie.overview}</td>
+              <td>{movie.popularity}</td>
+              <td>{movie.releaseDate}</td>
+              <td>
+                <button
+                  className='edit-button'
+                  onClick={() => handleEdit(movie.id)}
+                >
+                  Edit
+                </button>
+                <button
+                  className='delete-button'
+                  onClick={() => handleDelete(movie.id)}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
-[
-  {
-      "id": 1,
-      "userId": 1,
-      "tmdbId": 310,
-      "title": "Bruce Almightyx",
-      "overview": "\"Bruce Nolan toils as a \"human interest\" television reporter in Buffalo, NY, but despite his high ratings and the love of his beautiful girlfriend, Bruce remains unfulfilled. At the end of the worst day in his life, he angrily ridicules God - and the Almighty responds, endowing Bruce with all of His divine powers.",
-      "popularity": 57.52,
-      "releaseDate": "2003-05-23",
-      "voteAverage": 6.715,
-      "backdropPath": "uploads/backdrop1727345404.jpg",
-      "posterPath": "https://image.tmdb.org/t/p/original//3XJKBKh9Km89EoUEitVTSnrlAkZ.jpg",
-      "isFeatured": true,
-      "dateCreated": "2024-09-26 17:53:29",
-      "dateUpdated": "0000-00-00 00:00:00"
-  },
-  {
-      "id": 2,
-      "userId": 1,
-      "tmdbId": 123,
-      "title": "Jocas d' Great",
-      "overview": "Not cute.",
-      "popularity": 1,
-      "releaseDate": "2003-05-23",
-      "voteAverage": 5,
-      "backdropPath": "https://image.tmdb.org/t/p/original/gdGIwCH9OS2w2USTKUlcTppXfXz.jpg",
-      "posterPath": "https://image.tmdb.org/t/p/original/3XJKBKh9Km89EoUEitVTSnrlAkZ.jpg",
-      "isFeatured": false,
-      "dateCreated": "2024-10-05 10:50:02",
-      "dateUpdated": "0000-00-00 00:00:00"
-  },
-  {
-      "id": 3,
-      "userId": 1,
-      "tmdbId": 123,
-      "title": "Jollibee",
-      "overview": "Wrong item.",
-      "popularity": 1,
-      "releaseDate": "2003-05-23",
-      "voteAverage": 5,
-      "backdropPath": "https://image.tmdb.org/t/p/original/gdGIwCH9OS2w2USTKUlcTppXfXz.jpg",
-      "posterPath": "https://image.tmdb.org/t/p/original/3XJKBKh9Km89EoUEitVTSnrlAkZ.jpg",
-      "isFeatured": false,
-      "dateCreated": "2024-10-05 13:32:07",
-      "dateUpdated": "0000-00-00 00:00:00"
-  },
-  {
-      "id": 4,
-      "userId": 1,
-      "tmdbId": 125,
-      "title": "Jollibee",
-      "overview": "Wrong item.",
-      "popularity": 1,
-      "releaseDate": "2003-05-23",
-      "voteAverage": 5,
-      "backdropPath": "https://image.tmdb.org/t/p/original/gdGIwCH9OS2w2USTKUlcTppXfXz.jpg",
-      "posterPath": "https://image.tmdb.org/t/p/original/3XJKBKh9Km89EoUEitVTSnrlAkZ.jpg",
-      "isFeatured": false,
-      "dateCreated": "2024-10-05 13:45:29",
-      "dateUpdated": "0000-00-00 00:00:00"
-  }
-]
 export default Dashboard;

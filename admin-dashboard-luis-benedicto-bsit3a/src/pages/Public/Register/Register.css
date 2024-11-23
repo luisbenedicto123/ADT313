@@ -1,54 +1,96 @@
-.main-container {
+/* General Styles */
+.register-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: #0d0d0d;
+  color: #f5f5f5;
 }
 
-.form-container {
-  padding: 4rem 2rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.register-form {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), #1a1a1a);
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
-.form-container > div {
-  margin-bottom: 12px;
+.register-form h2 {
+  font-size: 2rem;
+  color: #e50914;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px #000;
 }
 
-.form-group {
-  display: flex;
-}
-
-.form-group label {
-  width: 70px;
-  margin-right: 8px;
+.input-group {
+  margin-bottom: 20px;
   text-align: left;
 }
 
-.register.errors {
-  margin-bottom: 1rem;
+.input-group label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #ccc;
 }
 
-.errors {
-  color: red;
-  font-size: 12px;
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background: #333;
+  border: 1px solid #444;
+  border-radius: 4px;
+  color: #fff;
 }
 
-.submit-container {
-  margin-top: 12px;
-  text-align: center;
+.input-group input:focus {
+  outline: none;
+  border-color: #e50914;
 }
 
-.login-container {
-  text-align: center;
+.error-message {
+  background: #e50914;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
 }
 
-.show-password {
-  margin-bottom: 1rem;
+.register-button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  background: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.register-button:hover {
+  background: #b0070e;
+}
+
+.register-button:disabled {
+  background: #444;
+  cursor: not-allowed;
+}
+
+.login-link {
+  margin-top: 20px;
+}
+
+.login-link a {
+  color: #e50914;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
 }

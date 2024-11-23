@@ -55,6 +55,40 @@ class MovieGateway
             $data["isFeatured"] = (bool) $data["isFeatured"];
         }
 
+        if($data) {
+
+            $castSql = "SELECT * FROM casts WHERE movieId = :movieId";
+            $res = $this->conn->prepare($castSql);
+            $res->bindValue(":movieId", $id, PDO::PARAM_INT);
+            $res->execute();
+            
+            $data["casts"] = [];
+            while ($castsRow = $res->fetch(PDO::FETCH_ASSOC)) {
+                $data["casts"][] = $castsRow;
+            }
+
+            $photosSql = "SELECT * FROM photos WHERE movieId = :movieId";
+            $res = $this->conn->prepare($photosSql);
+            $res->bindValue(":movieId", $id, PDO::PARAM_INT);
+            $res->execute();
+            
+            $data["photos"] = [];
+            while ($castsRow = $res->fetch(PDO::FETCH_ASSOC)) {
+                $data["photos"][] = $castsRow;
+            }
+
+            $videosSql = "SELECT * FROM videos WHERE movieId = :movieId";
+            $res = $this->conn->prepare($videosSql);
+            $res->bindValue(":movieId", $id, PDO::PARAM_INT);
+            $res->execute();
+            
+            $data["videos"] = [];
+            while ($videosRow = $res->fetch(PDO::FETCH_ASSOC)) {
+                $data["videos"][] = $videosRow;
+            }
+        }
+        
+
         return $data;
     }
 
@@ -82,10 +116,11 @@ class MovieGateway
 
     public function delete(string $id, string $userId): int
     {
-        $sql = "DELETE FROM movies WHERE id = :id AND userId = :userId";
+        // $sql = "DELETE FROM movies WHERE id = :id AND userId = :userId";
+        $sql = "DELETE FROM movies WHERE id = :id";
         $res = $this->conn->prepare($sql);
         $res->bindValue(":id", $id, PDO::PARAM_INT);
-        $res->bindValue(":userId", $userId, PDO::PARAM_INT);
+        // $res->bindValue(":userId", $userId, PDO::PARAM_INT);
 
         $res->execute();
 

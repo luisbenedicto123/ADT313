@@ -1,39 +1,100 @@
-.Main {
-  display: flex;
-  overflow: hidden;
-  max-height: 100vh;
-}
-.Main .container {
-  display: flex;
-  width: 100vw;
-}
-.Main .container .outlet {
-  flex-grow: 3;
-  padding: 1rem;
-}
-.Main .container .navigation {
-  background-color: aliceblue;
-  padding-top: 40px;
-  height: 100vh;
-}
-.Main .container .navigation ul {
-  list-style: none;
-  overflow: hidden;
-  padding: 0;
+body {
   margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #0d0d0d;
+  color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.Main .container .navigation ul li {
-  padding: 10px 80px 10px 20px;
-}
-.Main .container .navigation ul li.active,
-.Main .container .navigation ul li:hover {
-  background: #ccc;
-}
-.Main .container .navigation ul li a {
-  text-decoration: none;
+
+.main-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), #1a1a1a);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
-.Main .container .navigation ul li.logout {
+.main-header {
+  margin-bottom: 30px;
+}
+
+.main-header h1 {
+  font-size: 2.5rem;
+  color: #e50914; /* Netflix-inspired red */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.main-header p {
+  font-size: 1.2rem;
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.main-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.main-card {
+  background: #333;
+  color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.main-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.9);
+}
+
+.main-card h2 {
+  font-size: 1.5rem;
+  color: #e50914;
+  margin-bottom: 10px;
+}
+
+.main-card p {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+
+.main-button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  background: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.main-button:hover {
+  background: #b0070e;
+}
+
+.main-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.4);
 }
