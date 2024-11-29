@@ -1,0 +1,65 @@
+/* Movie Card Styles */
+.movie {
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 300px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease-in-out;
+}
+
+.movie:hover {
+  transform: scale(1.05);
+}
+
+.movie-image {
+  width: 100%;
+  height: 80%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.movie-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 0 0 8px 8px;
+  text-align: center;
+}
+
+.movie-title {
+  font-size: 16px;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  margin: 5px 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.movie-vote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.vote-icon {
+  font-size: 16px;
+  color: #ffb400;
+}
+
+.vote-average {
+  font-size: 14px;
+  color: white;
+  margin-left: 5px;
+}
